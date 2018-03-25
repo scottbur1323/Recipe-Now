@@ -10,7 +10,7 @@
     </div>
     <div id="column" v-show="showTheDeletes">
       <section id="column2" v-for="meals in mealData">
-        <input type="checkbox" class="checkbox" value="">
+        <input type="checkbox" class="checkbox" @click="checkForDelete($event)">
         <figure class="picntext">
           <img id="img" class="thumbnail" :src="meals.mealPic" alt="">
           <figcaption id="caption">{{ meals.mealName }}</figcaption>
@@ -27,7 +27,6 @@
       </section>
     </div>
     <p></p>
-    <button v-show="showTheDeletes" type="button" name="delete" v-on:click="actualDelete">DELETE</button>
     <button v-show="showTheDeletes" type="button" name="goBack" v-on:click="showMeals">GO BACK</button>
     <button v-show="showTheUpdates" type="button" name="update" v-on:click="actualUpdate">UPDATE</button>
     <button v-show="showTheUpdates" type="button" name="goBack" v-on:click="showMeals">GO BACK</button>
@@ -48,7 +47,8 @@ export default {
       ingredients: [],
       showTheMeals: true,
       showTheDeletes: false,
-      showTheUpdates: false
+      showTheUpdates: false,
+      idToDelete: 4
     }
   },
   methods: {
@@ -104,22 +104,40 @@ export default {
         })
       }
     },
+    checkForDelete: function(event) {
+      for (let j=0;j<this.mealData.length;j++) {
+        if (event.path[1].childNodes[2].childNodes[0].currentSrc.slice(-10) == this.mealData[j].mealPic.slice(-10)) {
+          this.idToDelete = this.mealData[j].id
+          this.actualDelete()
+        }
+      }
+    },
     actualDelete: function() {
-      alert('Deleted!')
-      // fetch(`http://localhost:3000/meal/4`,
-      // {
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      //   },
-      //   method: 'DELETE',
-      //   // body: JSON.stringify(this.newMeal)
-      // })
-      // .then(function(res){
-      //   console.log(res)
-      // }).catch(function(res){
-      //   console.log(res)
-      // })
+      alert('Deleting...')
+      if (confirm('Are you sure you want to delete this thing from the database?')) {
+        fetch(`http://localhost:3000/meal/${this.idToDelete}`,
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'DELETE',
+          // body: JSON.stringify(this.newMeal)
+        })
+        .then(function(res){
+          console.log(res)
+        }).catch(function(res){
+          console.log(res)
+        })
+        this.showMeals()
+        this.getPremadeMeals()
+      } else {
+          alert("Meal Was NOT Deleted!")
+          this.getPremadeMeals()
+          this.showMeals()
+      }
+
+
     },
     actualUpdate: function() {
         alert('Updated!')
