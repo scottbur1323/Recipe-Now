@@ -89,8 +89,8 @@ export default {
         if (this.ingredients[13] !== '') {this.newMeal.i14 = this.ingredients[13]}
         if (this.ingredients[14] !== '') {this.newMeal.i15 = this.ingredients[14]}
 
-        fetch('https://family-meal-planner.herokuapp.com/meal/',
-        // fetch('http://localhost:3000/meal',
+        //fetch('https://family-meal-planner.herokuapp.com/meal/',
+        fetch('http://localhost:3000/meal',
         {
           headers: {
             'Accept': 'application/json',
@@ -106,6 +106,7 @@ export default {
         })
         this.newMeal = { mealName: '', mealPic: '', instructionsLink: '', funIdeas: '', i1: '', i2: '', i3: '', i4: '', i5: '', i6: '', i7: '', i8: '', i9: '', i10: '', i11: '', i12: '', i13: '', i14: '', i15: ''}
         this.ingredients = []
+        location.reload()
       },
       getPremadeMeals: function() {
         fetch('mealAPI')

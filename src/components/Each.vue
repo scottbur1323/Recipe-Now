@@ -118,6 +118,7 @@ export default {
     actualDelete: function() {
       alert('Deleting...')
       if (confirm('Are you sure you want to delete this thing from the database?')) {
+        //fetch(`http://localhost:3000/meal/${this.idToDelete}`,
         fetch(`https://family-meal-planner.herokuapp.com/meal/${this.idToDelete}`,
         {
           headers: {
@@ -134,10 +135,12 @@ export default {
         })
         this.showMeals()
         this.getPremadeMeals()
+        location.reload()
       } else {
           alert("Meal Was NOT Deleted!")
           this.getPremadeMeals()
           this.showMeals()
+          location.reload()
       }
 
 
