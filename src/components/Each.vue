@@ -106,7 +106,10 @@ export default {
     },
     checkForDelete: function(event) {
       for (let j=0;j<this.mealData.length;j++) {
+        console.log(event.path[1].childNodes[2].childNodes[0].currentSrc.slice(-10))
+        console.log(this.mealData[j].mealPic.slice(-10))
         if (event.path[1].childNodes[2].childNodes[0].currentSrc.slice(-10) == this.mealData[j].mealPic.slice(-10)) {
+          console.log(this.mealData[j].id)
           this.idToDelete = this.mealData[j].id
           this.actualDelete()
         }
@@ -115,7 +118,7 @@ export default {
     actualDelete: function() {
       alert('Deleting...')
       if (confirm('Are you sure you want to delete this thing from the database?')) {
-        fetch(`http://localhost:3000/meal/${this.idToDelete}`,
+        fetch(`https://family-meal-planner.herokuapp.com/meal/${this.idToDelete}`,
         {
           headers: {
             'Accept': 'application/json',
