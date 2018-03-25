@@ -1,9 +1,10 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ msg }}</h1>
     <body class="body">
       <app-meals @mealWasClicked2="mealClicked2($event)" class="meals"></app-meals>
       <app-aside :ingredients="ingredients" class="aside"></app-aside>
+      <app-section></app-section>
     </body>
     <app-footer></app-footer>
   </div>
@@ -13,6 +14,7 @@
 import Meals from './Meals'
 import Aside from './Aside'
 import Footer from './Footer'
+import Section from './Section'
 
 export default {
   name: 'Main',
@@ -31,7 +33,8 @@ export default {
   components: {
     appAside: Aside,
     appMeals: Meals,
-    appFooter: Footer
+    appFooter: Footer,
+    appSection: Section
   }
 }
 </script>
@@ -52,9 +55,6 @@ body {
 .aside {
   width: 100%;
   border-style: ridge;
-}
-.hello {
-  /* min-width: 500px; */
 }
 
 </style>

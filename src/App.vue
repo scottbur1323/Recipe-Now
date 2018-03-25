@@ -4,6 +4,7 @@
       <p>
         TOP OF PAGE
       </p>
+      </script>
     </header>
     <router-view/>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <p>{{ author }}</p>
   </div>
 </template>
 
@@ -9,12 +9,22 @@ export default {
   name: 'Footer',
   data () {
     return {
-      msg: "Footer"
+      author: "Chance Scott-Burke Copyright 2018",
     }
   }
 }
 </script>
 
 <style scoped>
+
+p {
+  font-size: 12px;
+  text-align: left;
+  display: flex;
+  flex-flow: column;
+  margin-top: 15px;
+  margin-bottom: -4px;
+
+}
 
 </style>

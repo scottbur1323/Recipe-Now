@@ -1,11 +1,38 @@
 <template>
-  <div id="column">
-    <section id="column2" v-for="meals in mealData">
-      <figure class="picntext">
-        <img id="img" @click="selectItem($event)" class="thumbnail" :src="meals.mealPic" alt="">
-        <figcaption id="caption">{{ meals.mealName }}</figcaption>
-      </figure>
-    </section>
+  <div>
+    <div id="column" v-show="showTheMeals">
+      <section id="column2" v-for="meals in mealData">
+        <figure class="picntext">
+          <img id="img" @click="selectItem($event)" class="thumbnail" :src="meals.mealPic" alt="">
+          <figcaption id="caption">{{ meals.mealName }}</figcaption>
+        </figure>
+      </section>
+    </div>
+    <div id="column" v-show="showTheDeletes">
+      <section id="column2" v-for="meals in mealData">
+        <input type="checkbox" class="checkbox" value="">
+        <figure class="picntext">
+          <img id="img" class="thumbnail" :src="meals.mealPic" alt="">
+          <figcaption id="caption">{{ meals.mealName }}</figcaption>
+        </figure>
+      </section>
+    </div>
+    <div id="column" v-show="showTheUpdates">
+      <section id="column2" v-for="meals in mealData">
+        <input type="checkbox" class="checkbox" value="">
+        <figure class="picntext">
+          <img id="img" class="thumbnail" :src="meals.mealPic" alt="">
+          <figcaption id="caption">{{ meals.mealName }}</figcaption>
+        </figure>
+      </section>
+    </div>
+    <p></p>
+    <button v-show="showTheDeletes" type="button" name="delete" v-on:click="actualDelete">DELETE</button>
+    <button v-show="showTheDeletes" type="button" name="goBack" v-on:click="showMeals">GO BACK</button>
+    <button v-show="showTheUpdates" type="button" name="update" v-on:click="actualUpdate">UPDATE</button>
+    <button v-show="showTheUpdates" type="button" name="goBack" v-on:click="showMeals">GO BACK</button>
+    <button v-show="showTheMeals" type="button" name="deleteButton" v-on:click="showDeletes">Delete Meal</button>
+    <button v-show="showTheMeals" type="button" name="updateButton" v-on:click="showUpdates">Update Meal</button>
   </div>
 </template>
 
@@ -16,8 +43,12 @@ export default {
   data () {
     return {
       mealAPI: 'https://family-meal-planner.herokuapp.com/meal',
+      // mealAPI: 'http://localhost:3000/meal',
       mealData: [],
-      ingredients: []
+      ingredients: [],
+      showTheMeals: true,
+      showTheDeletes: false,
+      showTheUpdates: false
     }
   },
   methods: {
@@ -28,13 +59,14 @@ export default {
         })
         .then(response => {
           this.mealData = response.meals
+          console.log(this.mealData)
         })
     },
     selectItem: function(event) {
       if (event.target.className == "thumbnail2") {
         event.target.className = "thumbnail"
         for (let i=0;i<this.mealData.length;i++) {
-          if (this.mealData[i].mealPic.slice(-7) == event.target.src.slice(-7)) {
+          if (this.mealData[i].mealPic.slice(-10) == event.target.src.slice(-10)) {
               for (let j=0;j<this.ingredients.length;j++) {
                   if (this.ingredients[j][0] == this.mealData[i].id) {
                       this.ingredients.splice(j, 1)
@@ -71,7 +103,57 @@ export default {
           ingredients: this.ingredients
         })
       }
+    },
+    actualDelete: function() {
+      alert('Deleted!')
+      // fetch(`http://localhost:3000/meal/4`,
+      // {
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+      //   method: 'DELETE',
+      //   // body: JSON.stringify(this.newMeal)
+      // })
+      // .then(function(res){
+      //   console.log(res)
+      // }).catch(function(res){
+      //   console.log(res)
+      // })
+    },
+    actualUpdate: function() {
+        alert('Updated!')
+        // fetch(`http://localhost:3000/meal/4`,
+        // {
+        //   headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json'
+        //   },
+        //   method: 'DELETE',
+        //   // body: JSON.stringify(this.newMeal)
+        // })
+        // .then(function(res){
+        //   console.log(res)
+        // }).catch(function(res){
+        //   console.log(res)
+        // })
+    },
+    showDeletes: function() {
+        this.showTheDeletes = true
+        this.showTheMeals = false
+        this.showTheUpdates = false
+    },
+    showUpdates: function() {
+        this.showTheUpdates = true
+        this.showTheMeals = false
+        this.showTheDeletes = false
+    },
+    showMeals: function() {
+        this.showTheDeletes = false
+        this.showTheMeals = true
+        this.showTheUpdates = false
     }
+
   },
   mounted() {
     this.getPremadeMeals()
@@ -88,10 +170,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  /* float:right; */
-  /* height: 250px; */
-  /* width:250px; */
-  padding:3px;
+  transition: height 2s;
 }
 .picntext {
   max-height: 100%;
@@ -101,6 +180,7 @@ export default {
   justify-content: space-around;
   max-width: 100%;
   padding: 2px;
+  padding-top: 0px;
   background-color: #F3F3F3;
 }
 
@@ -141,8 +221,14 @@ figcaption {
 }
 
 #column2 {
-  height:224px;
-  overflow:auto;
+  height:160px;
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox {
+  margin-top: 75px;
+  margin-right: -25px;
 }
 
 

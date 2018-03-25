@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div id="shopping-list">
     <h2>{{ msg }}</h2>
-    <ul v-for="ingred in ingredients">
-      <li>{{ ingred }}</li>
-    </ul>
-    <p>-----------------------</p>
-    <!-- <p>{{ ingredients }}</p> -->
+    <section v-for="meal in ingredients" v-show="showListItems">
+      <div id="inbetweenMeals" v-for="items in meal" v-if="!Number.isInteger(items)">
+        <ul id="inbetweenIngredients">{{ items }}</ul>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -14,30 +14,45 @@ export default {
   name: 'Aside',
   data () {
     return {
-      modifiedIngredients: "",
-      msg: "Shopping List:"
+      msg: "- Shopping List -",
+      showListItems: true
     }
   },
   props: ['ingredients'],
-  methods: {
-    modifyIngredients() {
-      let newIngredients = []
-      for (let i=0;i<this.ingredients.length;i++) {
-        for (let j=0;j<this.ingredients[i].length;j++) {
-            // I'm attempting to re-write the array
-            // so I can use a single array with the
-            // v-for method
-        }
-        this.modifiedIngredients = `1. ${this.ingredients}`
-      }
-    }
-  },
-  updated() {
-    this.modifyIngredients()
-  }
 }
 </script>
 
 <style scoped>
+
+#shopping-list {
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+}
+
+#inbetweenMeals {
+  padding-right: 55px;
+}
+
+#inbetweenIngredients {
+  margin-bottom: 0px;
+}
+
+h2 {
+  margin-bottom: -3px;
+}
+
+.listButton {
+  align-self: center;
+  border-width: 5px;
+  border-color: "blue";
+  transition: border-color 1s;
+  width: 85px;
+  margin-top: 20px;
+}
 
 </style>
