@@ -41,8 +41,8 @@ export default {
   name: 'Each',
   data () {
     return {
-      // mealAPI: 'https://family-meal-planner.herokuapp.com/meal',
-      mealAPI: 'http://localhost:3000/meal',
+      mealAPI: 'https://family-meal-planner.herokuapp.com/meal',
+      //mealAPI: 'http://localhost:3000/meal',
       mealData: [],
       ingredients: [],
       showTheMeals: true,
