@@ -119,7 +119,7 @@ export default {
       alert('Deleting...')
       if (confirm('Are you sure you want to delete this thing from the database?')) {
         //fetch(`http://localhost:3000/meal/${this.idToDelete}`,
-        fetch(`https://family-meal-planner.herokuapp.com/meal/${this.idToDelete}`,
+        fetch(`https://family-meal-planner.herokuapp.com/meal/7`,
         {
           headers: {
             'Accept': 'application/json',

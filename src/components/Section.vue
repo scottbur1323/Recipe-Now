@@ -72,7 +72,6 @@ export default {
       },
       addMealToDB: function() {
         alert('Submitted!')
-
         if (this.ingredients[0] !== '') {this.newMeal.i1 = this.ingredients[0]}
         if (this.ingredients[1] !== '') {this.newMeal.i2 = this.ingredients[1]}
         if (this.ingredients[2] !== '') {this.newMeal.i3 = this.ingredients[2]}
@@ -88,9 +87,8 @@ export default {
         if (this.ingredients[12] !== '') {this.newMeal.i13 = this.ingredients[12]}
         if (this.ingredients[13] !== '') {this.newMeal.i14 = this.ingredients[13]}
         if (this.ingredients[14] !== '') {this.newMeal.i15 = this.ingredients[14]}
-
-        //fetch('https://family-meal-planner.herokuapp.com/meal/',
-        fetch('http://localhost:3000/meal',
+        fetch('https://family-meal-planner.herokuapp.com/meal/',
+        //fetch('http://localhost:3000/meal',
         {
           headers: {
             'Accept': 'application/json',
