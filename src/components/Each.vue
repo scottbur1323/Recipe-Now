@@ -45,18 +45,16 @@
       <p></p>
       <button type="button" name="button" v-on:click="actualUpdate">Update Meal</button>
     </form>
-
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'Each',
   data () {
     return {
-      mealAPI: 'https://family-meal-planner.herokuapp.com/meal',
-      //mealAPI: 'http://localhost:3000/meal',
+      //mealAPI: 'https://family-meal-planner.herokuapp.com/meal',
+      mealAPI: 'http://localhost:3000/meal',
       mealData: [],
       ingredients: [],
       showTheMeals: true,
@@ -167,8 +165,8 @@ export default {
     actualDelete: function() {
       alert('Deleting...')
       if (confirm('Are you sure you want to delete this thing from the database?')) {
-        //fetch(`http://localhost:3000/meal/${this.idToDelete}`,
-        fetch(`https://family-meal-planner.herokuapp.com/meal/${this.idToDelete}`,
+        fetch(`http://localhost:3000/meal/${this.idToDelete}`,
+        //fetch(`https://family-meal-planner.herokuapp.com/meal/${this.idToDelete}`,
         {
           headers: {
             'Accept': 'application/json',
@@ -214,8 +212,8 @@ export default {
         if (this.ingredientsToUpdate[14] != '' && this.ingredientsToUpdate[14] != null) {this.finalObjectToUpdate.i15 = this.ingredientsToUpdate[14]}
         alert('Updating...')
         if (confirm('Are you sure you want to update this meal in the database?')) {
-          //fetch(`http://localhost:3000/meal/${this.objectToUpdate.id}`,
-          fetch(`https://family-meal-planner.herokuapp.com/meal/${this.objectToUpdate.id}`,
+          fetch(`http://localhost:3000/meal/${this.objectToUpdate.id}`,
+          //fetch(`https://family-meal-planner.herokuapp.com/meal/${this.objectToUpdate.id}`,
           {
             headers: {
               'Accept': 'application/json',
@@ -276,7 +274,6 @@ export default {
           i14: '',
           i15: ''
         }
-
     },
     populateMealName() {
       this.objectToUpdate.mealName = event.target.value
@@ -292,7 +289,6 @@ export default {
     },
     populateIngredients() {
       this.ingredientsToUpdate = event.target.value.split(',')
-
     }
   },
   mounted() {

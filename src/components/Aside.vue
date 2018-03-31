@@ -18,11 +18,6 @@ export default {
       showListItems: true
     }
   },
-  methods: {
-    makeList: function() {
-
-    }
-  },
   props: ['ingredients'],
 }
 </script>

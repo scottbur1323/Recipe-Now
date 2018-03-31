@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
+    <h3>Click ingredients when you put them in your cart!</h2>
     <section v-for="meal in ingredients">
       <div id="inbetweenMeals" v-for="items in meal" v-if="!(items == null) && !Number.isInteger(items)">
         <ul class="eachIngredient" @click="obtainedItem"> {{ items }}</ul>

@@ -3,13 +3,13 @@
     <button class="addButton" type="button" name="button" @click="addAMealButton()">Add Meal</button>
     <form v-if="addMealButton" class="submit">
       <p>Enter the name of your meal:</p>
-      <input class="formInput" type="text" name="mealName" v-on:keyup="addMealName"><p>{{ newMeal.mealName }}</p>
+      <input class="formInput" type="text" name="mealName" v-on:keyup="addMealName">
       <p>Enter the source url of your meal picture:</p>
-      <input class="formInput" type="text" name="mealPic" v-on:keyup="addMealPic"><p>{{ newMeal.mealPic }}</p>
+      <input class="formInput" type="text" name="mealPic" v-on:keyup="addMealPic">
       <p>Enter a link with the instructions for your meal.</p>
-      <input class="formInput" type="text" name="instructionsLink" v-on:keyup="addInstructionsLink"><p>{{ newMeal.instructionsLink }}</p>
+      <input class="formInput" type="text" name="instructionsLink" v-on:keyup="addInstructionsLink">
       <p>Anything you want to add?</p>
-      <input class="formInput" type="text" name="funIdeas" v-on:keyup="addFunIdeas"><p>{{ newMeal.funIdeas }}</p>
+      <input class="formInput" type="text" name="funIdeas" v-on:keyup="addFunIdeas">
       <p>Enter the ingredients of your meal, separated by commas.</p>
       <input class="formInput" type="text" name="Ingredients" v-on:keyup="addIngredients"><p>{{ ingredients }}</p>
       <p></p>
@@ -68,7 +68,6 @@ export default {
       },
       addIngredients: function() {
         this.ingredients = event.target.value.split(', ')
-        // this.ingredients = this.ingredients.split(', ')
       },
       addMealToDB: function() {
         alert('Submitted!')
@@ -87,8 +86,8 @@ export default {
         if (this.ingredients[12] !== '') {this.newMeal.i13 = this.ingredients[12]}
         if (this.ingredients[13] !== '') {this.newMeal.i14 = this.ingredients[13]}
         if (this.ingredients[14] !== '') {this.newMeal.i15 = this.ingredients[14]}
-        fetch('https://family-meal-planner.herokuapp.com/meal/',
-        //fetch('http://localhost:3000/meal',
+        //fetch('https://family-meal-planner.herokuapp.com/meal/',
+        fetch('http://localhost:3000/meal',
         {
           headers: {
             'Accept': 'application/json',
@@ -105,16 +104,6 @@ export default {
         this.newMeal = { mealName: '', mealPic: '', instructionsLink: '', funIdeas: '', i1: '', i2: '', i3: '', i4: '', i5: '', i6: '', i7: '', i8: '', i9: '', i10: '', i11: '', i12: '', i13: '', i14: '', i15: ''}
         this.ingredients = []
         location.reload()
-      },
-      getPremadeMeals: function() {
-        fetch('mealAPI')
-          .then(response => {
-            return response.json()
-          })
-          .then(response => {
-            this.mealData = response.meals
-            console.log(this.mealData)
-          })
       }
   }
 }
