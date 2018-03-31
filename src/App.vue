@@ -25,5 +25,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   border-style: ridge;
+  min-width: 270px;
 }
 </style>

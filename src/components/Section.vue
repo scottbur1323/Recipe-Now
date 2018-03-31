@@ -3,15 +3,15 @@
     <button class="addButton" type="button" name="button" @click="addAMealButton()">Add Meal</button>
     <form v-if="addMealButton" class="submit">
       <p>Enter the name of your meal:</p>
-      <input type="text" name="mealName" v-on:keyup="addMealName"><p>{{ newMeal.mealName }}</p>
+      <input class="formInput" type="text" name="mealName" v-on:keyup="addMealName"><p>{{ newMeal.mealName }}</p>
       <p>Enter the source url of your meal picture:</p>
-      <input type="text" name="mealPic" v-on:keyup="addMealPic"><p>{{ newMeal.mealPic }}</p>
+      <input class="formInput" type="text" name="mealPic" v-on:keyup="addMealPic"><p>{{ newMeal.mealPic }}</p>
       <p>Enter a link with the instructions for your meal.</p>
-      <input type="text" name="instructionsLink" v-on:keyup="addInstructionsLink"><p>{{ newMeal.instructionsLink }}</p>
+      <input class="formInput" type="text" name="instructionsLink" v-on:keyup="addInstructionsLink"><p>{{ newMeal.instructionsLink }}</p>
       <p>Anything you want to add?</p>
-      <input type="text" name="funIdeas" v-on:keyup="addFunIdeas"><p>{{ newMeal.funIdeas }}</p>
+      <input class="formInput" type="text" name="funIdeas" v-on:keyup="addFunIdeas"><p>{{ newMeal.funIdeas }}</p>
       <p>Enter the ingredients of your meal, separated by commas.</p>
-      <input type="text" name="Ingredients" v-on:keyup="addIngredients"><p>{{ ingredients }}</p>
+      <input class="formInput" type="text" name="Ingredients" v-on:keyup="addIngredients"><p>{{ ingredients }}</p>
       <p></p>
       <button type="button" name="button" v-on:click="addMealToDB">Submit</button>
     </form>
@@ -129,6 +129,10 @@ export default {
   transition: border-color 1s;
   width: 85px;
   margin-top: 20px;
+}
+
+.formInput {
+  min-width: 240px;
 }
 
 </style>

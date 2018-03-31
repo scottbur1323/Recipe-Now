@@ -2,9 +2,13 @@
   <div>
     <h1>{{ msg }}</h1>
     <body class="body">
-      <app-meals @mealWasClicked2="mealClicked2($event)" class="meals"></app-meals>
-      <app-aside :ingredients="ingredients" class="aside"></app-aside>
-      <app-section></app-section>
+      <app-meals @mealWasClicked2="mealClicked2($event)" class="meals" v-show="showGenerated"></app-meals>
+      <app-aside :ingredients="ingredients" class="aside" v-show="showGenerated"></app-aside>
+      <button type="button" class="generateButton" v-on:click="showGenerated = !showGenerated" v-show="showGenerated">Generate Final List</button>
+      <button type="button" class="generateButton" v-on:click="showGenerated = !showGenerated" v-show="!showGenerated">Go Back</button>
+
+      <app-list :ingredients="ingredients" class="list" v-show="!showGenerated"></app-list>
+      <app-section v-show="showGenerated"></app-section>
     </body>
     <app-footer></app-footer>
   </div>
@@ -15,14 +19,15 @@ import Meals from './Meals'
 import Aside from './Aside'
 import Footer from './Footer'
 import Section from './Section'
+import List from './List'
 
 export default {
   name: 'Main',
   data () {
     return {
-      msg: "Welcome to Family Meal Planner",
-      ingredients: []
-
+      msg: "Family Meal Planner",
+      ingredients: [],
+      showGenerated: true
     }
   },
   methods: {
@@ -34,7 +39,8 @@ export default {
     appAside: Aside,
     appMeals: Meals,
     appFooter: Footer,
-    appSection: Section
+    appSection: Section,
+    appList: List
   }
 }
 </script>
@@ -52,9 +58,18 @@ body {
   max-height: 35%;
   border-style: ridge;
 }
-.aside {
+.aside,.section {
   width: 100%;
   border-style: ridge;
+}
+
+.generateButton {
+  align-self: center;
+  border-width: 5px;
+  border-color: "blue";
+  transition: border-color 1s;
+  width: 85px;
+  margin-top: 20px;
 }
 
 </style>

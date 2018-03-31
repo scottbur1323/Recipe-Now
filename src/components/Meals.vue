@@ -1,7 +1,7 @@
 <template>
   <div class="meals">
     <h2>{{ msg }}</h2>
-    <button class="eachButton" type="button" name="button" @click="showTheEach($event)">Show Meals</button>
+    <button class="eachButton" type="button" name="button" @click="showTheEach($event)">Hide Meals</button>
     <app-each @mealWasClicked="mealClicked($event)" class="each" v-show="showEach"></app-each>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       msg: "- Click on meals to add to grocery list -",
-      showEach: false,
+      showEach: true,
       ingredientsAll: []
     }
   },
@@ -25,8 +25,8 @@ export default {
     showTheEach: function(event) {
       this.showEach = !(this.showEach)
       if (this.showEach == true) {
-        event.srcElement.style.borderColor = "blue"
-      } else event.srcElement.style.borderColor = ""
+        // event.srcElement.style.borderColor = "black"
+      } else event.srcElement.style.borderColor = "grey"
     },
     mealClicked: function(event) {
       this.ingredientsAll = event.ingredients
@@ -42,7 +42,7 @@ export default {
 
 .eachButton {
   border-width: 5px;
-  border-color: "grey";
+  border-color: "black";
   transition: border-color 1s;
   margin-bottom: 20px;
 }

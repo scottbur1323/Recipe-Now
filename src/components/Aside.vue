@@ -18,6 +18,11 @@ export default {
       showListItems: true
     }
   },
+  methods: {
+    makeList: function() {
+
+    }
+  },
   props: ['ingredients'],
 }
 </script>
@@ -46,13 +51,5 @@ h2 {
   margin-bottom: -3px;
 }
 
-.listButton {
-  align-self: center;
-  border-width: 5px;
-  border-color: "blue";
-  transition: border-color 1s;
-  width: 85px;
-  margin-top: 20px;
-}
 
 </style>
