@@ -86,8 +86,8 @@ export default {
         if (this.ingredients[12] !== '') {this.newMeal.i13 = this.ingredients[12]}
         if (this.ingredients[13] !== '') {this.newMeal.i14 = this.ingredients[13]}
         if (this.ingredients[14] !== '') {this.newMeal.i15 = this.ingredients[14]}
-        //fetch('https://family-meal-planner.herokuapp.com/meal/',
-        fetch('http://localhost:3000/meal',
+        fetch('https://family-meal-planner.herokuapp.com/meal/',
+        //fetch('http://localhost:3000/meal',
         {
           headers: {
             'Accept': 'application/json',
