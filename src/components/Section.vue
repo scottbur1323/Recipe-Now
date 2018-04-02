@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="">
     <button class="addButton" type="button" name="button" @click="addAMealButton()">Add Meal</button>
-    <form v-if="addMealButton" class="submit">
+    <form v-if="addMealButton" class="submit pure-form-aligned">
       <p>Enter the name of your meal:</p>
       <input class="formInput" type="text" name="mealName" v-on:keyup="addMealName">
       <p>Enter the source url of your meal picture:</p>
@@ -109,14 +109,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 .addButton {
-  align-self: center;
+  /* align-self: center;
   border-width: 5px;
   border-color: "blue";
   transition: border-color 1s;
-  width: 85px;
+  width: 85px; */
   margin-top: 20px;
 }
 

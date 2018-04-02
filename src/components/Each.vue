@@ -2,7 +2,7 @@
   <div>
     <div id="column" v-show="showTheMeals">
       <section id="column2" v-for="meals in mealData">
-        <figure class="picntext" v-cloak>
+        <figure class="picntext">
           <img id="img" @click="selectItem($event)" class="thumbnail" :src="meals.mealPic" alt="">
           <figcaption id="caption">{{ meals.mealName }}</figcaption>
         </figure>
@@ -53,8 +53,8 @@ export default {
   name: 'Each',
   data () {
     return {
-      //mealAPI: 'https://family-meal-planner.herokuapp.com/meal',
-      mealAPI: 'http://localhost:3000/meal',
+      mealAPI: 'https://family-meal-planner.herokuapp.com/meal',
+      //mealAPI: 'http://localhost:3000/meal',
       mealData: [],
       ingredients: [],
       showTheMeals: true,
@@ -165,15 +165,14 @@ export default {
     actualDelete: function() {
       alert('Deleting...')
       if (confirm('Are you sure you want to delete this thing from the database?')) {
-        fetch(`http://localhost:3000/meal/${this.idToDelete}`,
-        //fetch(`https://family-meal-planner.herokuapp.com/meal/${this.idToDelete}`,
+        fetch(`https://family-meal-planner.herokuapp.com/meal/${this.idToDelete}`,
+        //fetch(`http://localhost:3000/meal/${this.idToDelete}`,
         {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
           method: 'DELETE',
-          body: JSON.stringify(this.newMeal)
         })
         .then(function(res){
           console.log(res)
@@ -195,6 +194,8 @@ export default {
         this.finalObjectToUpdate.mealPic = this.objectToUpdate.mealPic
         this.finalObjectToUpdate.instructionsLink = this.objectToUpdate.instructionsLink
         this.finalObjectToUpdate.funIdeas = this.objectToUpdate.funIdeas
+        console.log(this.ingredientsToUpdate)
+        console.log(this.ingredientsToUpdate[8])
         if (this.ingredientsToUpdate[0] != '' && this.ingredientsToUpdate[0] != null) {this.finalObjectToUpdate.i1 = this.ingredientsToUpdate[0]}
         if (this.ingredientsToUpdate[1] != '' && this.ingredientsToUpdate[1] != null) {this.finalObjectToUpdate.i2 = this.ingredientsToUpdate[1]}
         if (this.ingredientsToUpdate[2] != '' && this.ingredientsToUpdate[2] != null) {this.finalObjectToUpdate.i3 = this.ingredientsToUpdate[2]}
@@ -203,17 +204,17 @@ export default {
         if (this.ingredientsToUpdate[5] != '' && this.ingredientsToUpdate[5] != null) {this.finalObjectToUpdate.i6 = this.ingredientsToUpdate[5]}
         if (this.ingredientsToUpdate[6] != '' && this.ingredientsToUpdate[6] != null) {this.finalObjectToUpdate.i7 = this.ingredientsToUpdate[6]}
         if (this.ingredientsToUpdate[7] != '' && this.ingredientsToUpdate[7] != null) {this.finalObjectToUpdate.i8 = this.ingredientsToUpdate[7]}
-        if (this.ingredientsToUpdate[8] != '' && this.ingredientsToUpdate[8] != null) {this.finalObjectToUpdate.i9 = this.ingredientsToUpdate[8]}
-        if (this.ingredientsToUpdate[9] != '' && this.ingredientsToUpdate[9] != null) {this.finalObjectToUpdate.i10 = this.ingredientsToUpdate[9]}
-        if (this.ingredientsToUpdate[10] != '' && this.ingredientsToUpdate[10] != null) {this.finalObjectToUpdate.i11 = this.ingredientsToUpdate[10]}
-        if (this.ingredientsToUpdate[11] != '' && this.ingredientsToUpdate[11] != null) {this.finalObjectToUpdate.i12 = this.ingredientsToUpdate[11]}
-        if (this.ingredientsToUpdate[12] != '' && this.ingredientsToUpdate[12] != null) {this.finalObjectToUpdate.i13 = this.ingredientsToUpdate[12]}
-        if (this.ingredientsToUpdate[13] != '' && this.ingredientsToUpdate[13] != null) {this.finalObjectToUpdate.i14 = this.ingredientsToUpdate[13]}
-        if (this.ingredientsToUpdate[14] != '' && this.ingredientsToUpdate[14] != null) {this.finalObjectToUpdate.i15 = this.ingredientsToUpdate[14]}
+        if (this.ingredientsToUpdate[8] != '' && this.ingredientsToUpdate[8] != null) {this.finalObjectToUpdate.i9 = this.ingredientsToUpdate[8]} else {this.finalObjectToUpdate.i9 = ''}
+        if (this.ingredientsToUpdate[9] != '' && this.ingredientsToUpdate[9] != null) {this.finalObjectToUpdate.i10 = this.ingredientsToUpdate[9]} else {this.finalObjectToUpdate.i10 = ''}
+        if (this.ingredientsToUpdate[10] != '' && this.ingredientsToUpdate[10] != null) {this.finalObjectToUpdate.i11 = this.ingredientsToUpdate[10]} else {this.finalObjectToUpdate.i1 = ''}
+        if (this.ingredientsToUpdate[11] != '' && this.ingredientsToUpdate[11] != null) {this.finalObjectToUpdate.i12 = this.ingredientsToUpdate[11]} else {this.finalObjectToUpdate.i2 = ''}
+        if (this.ingredientsToUpdate[12] != '' && this.ingredientsToUpdate[12] != null) {this.finalObjectToUpdate.i13 = this.ingredientsToUpdate[12]} else {this.finalObjectToUpdate.i3 = ''}
+        if (this.ingredientsToUpdate[13] != '' && this.ingredientsToUpdate[13] != null) {this.finalObjectToUpdate.i14 = this.ingredientsToUpdate[13]} else {this.finalObjectToUpdate.i4 = ''}
+        if (this.ingredientsToUpdate[14] != '' && this.ingredientsToUpdate[14] != null) {this.finalObjectToUpdate.i15 = this.ingredientsToUpdate[14]} else {this.finalObjectToUpdate.i5 = ''}
         alert('Updating...')
         if (confirm('Are you sure you want to update this meal in the database?')) {
-          fetch(`http://localhost:3000/meal/${this.objectToUpdate.id}`,
-          //fetch(`https://family-meal-planner.herokuapp.com/meal/${this.objectToUpdate.id}`,
+          fetch(`https://family-meal-planner.herokuapp.com/meal/${this.objectToUpdate.id}`,
+          //fetch(`http://localhost:3000/meal/${this.objectToUpdate.id}`,
           {
             headers: {
               'Accept': 'application/json',
@@ -367,20 +368,6 @@ figcaption {
 
 .formInput {
   min-width: 240px;
-}
-
-[v-cloak] {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 </style>

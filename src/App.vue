@@ -1,8 +1,8 @@
 <template>
   <div id="app">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <header>
       <p>
-        TOP OF PAGE
       </p>
       </script>
     </header>
@@ -23,8 +23,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   border-style: ridge;
   min-width: 270px;
+  background-color: #F3F3F3;
+  color: #282C34;
 }
 </style>
