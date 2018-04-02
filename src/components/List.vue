@@ -30,7 +30,7 @@ export default {
     return {
       msg: ' - Your Shopping List - ',
       newIngredient: '',
-      grocerAPI: 'https://family-meal-planner.herokuapp.com/grocer'
+      grocerAPI: 'https://family-meal-planner.herokuapp.com/grocer',
       //grocerAPI: 'http://localhost:3000/grocer',
       grocerData: []
     }
