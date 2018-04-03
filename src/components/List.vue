@@ -63,13 +63,13 @@
     <form v-show="showTheUpdateForm" class="submit">
       <img src="" alt="">
       <p>Enter the name of the grocer:</p>
-      <input class="formInput" type="text" name="grocerName" v-on:keyup="populateGrocerName" :value="grocerObjectToAdd.grocerName"><p>{{ grocerObjectToAdd.grocerName }}</p>
+      <input class="formInput" type="text" name="grocerName" v-on:keyup="populateGrocerName" :value="grocerObjectToAdd.grocerName">
       <p>Enter the source url of the grocer picture:</p>
-      <input class="formInput" type="text" name="grocerPic" v-on:keyup="populateGrocerPic" :value="grocerObjectToAdd.grocerPic"><p>{{ grocerObjectToAdd.grocerPic }}</p>
+      <input class="formInput" type="text" name="grocerPic" v-on:keyup="populateGrocerPic" :value="grocerObjectToAdd.grocerPic">
       <p>Enter a link with the website for the grocer:</p>
-      <input class="formInput" type="text" name="grocerLink" v-on:keyup="populateGrocerLink" :value="grocerObjectToAdd.grocerLink"><p>{{ grocerObjectToAdd.grocerLink }}</p>
+      <input class="formInput" type="text" name="grocerLink" v-on:keyup="populateGrocerLink" :value="grocerObjectToAdd.grocerLink">
       <p>Anything you want to add?</p>
-      <input class="formInput" type="text" name="funIdeas" v-on:keyup="populateOther" :value="grocerObjectToAdd.other"><p>{{ grocerObjectToAdd.other}}</p>
+      <input class="formInput" type="text" name="funIdeas" v-on:keyup="populateOther" :value="grocerObjectToAdd.other">
       <p></p>
       <button type="button" name="button" v-on:click="realUpdateGrocer">Update Grocer</button>
     </form>
@@ -136,6 +136,7 @@ export default {
     },
     addGrocer: function() {
       this.showTheAddGrocer = !this.showTheAddGrocer
+      this.showTheUpdateForm = false
     },
     deleteGrocer: function() {
       this.showTheGrocers = false
@@ -146,11 +147,15 @@ export default {
       this.showTheGrocers = false
       this.showTheUpdateGrocers = true
       this.showTheDeleteGrocers = false
+      this.showTheAddGrocer = false
     },
     showEachGrocer: function() {
       this.showTheGrocers = true
       this.showTheUpdateGrocers = false
+      this.showTheUpdateForm = false
       this.showTheDeleteGrocers = false
+      this.grocerObjectToAdd = { grocerName: '', grocerPic: '', grocerLink: '', other: '' }
+
     },
     clickDeleteGrocer: function() {
       this.isItReady = false
@@ -185,15 +190,17 @@ export default {
     clickUpdateGrocer: function() {
       for (let i=0;i<this.grocerData.length;i++) {
         if (this.grocerData[i].grocerPic == event.target.src) {
+          this.showTheUpdateForm = true
           this.grocerIDUpdate = this.grocerData[i].id
           this.grocerNameUpdate = this.grocerData[i].grocerName
-          this.showTheUpdateForm = true
           this.grocerObjectToAdd.grocerName = this.grocerData[i].grocerName
           this.grocerObjectToAdd.grocerPic = this.grocerData[i].grocerPic
           this.grocerObjectToAdd.grocerLink = this.grocerData[i].grocerLink
           this.grocerObjectToAdd.other = this.grocerData[i].other
+
         }
       }
+      window.scrollBy(0, 200)
     },
     populateGrocerName: function() {
       this.grocerObjectToAdd.grocerName = event.target.value
@@ -284,7 +291,6 @@ export default {
           })
           this.showEachGrocer()
           this.getGrocers()
-          this.grocerObjectToAdd = { grocerName: '', grocerPic: '', grocerLink: '', other: '' }
           location.reload()
         }
       }

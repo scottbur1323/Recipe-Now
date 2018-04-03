@@ -27,8 +27,8 @@
       </section>
     </div>
     <p></p>
-    <button v-show="showTheDeletes" type="button" name="goBack" v-on:click="showMeals">GO BACK</button>
-    <button v-show="showTheUpdates" type="button" name="goBack" v-on:click="showMeals">GO BACK</button>
+    <button v-show="showTheDeletes" type="button" name="goBack" v-on:click="showMeals">Go Back</button>
+    <button v-show="showTheUpdates" type="button" name="goBack" v-on:click="showMeals">Go Back</button>
     <button v-show="showTheMeals" type="button" name="deleteButton" v-on:click="showDeletes">Delete Meal</button>
     <button v-show="showTheMeals" type="button" name="updateButton" v-on:click="showUpdates">Update Meal</button>
     <form v-if="showUpdateForm" class="submit">
@@ -369,7 +369,7 @@ export default {
   max-width: 100%;
   padding: 2px;
   padding-top: 0px;
-  background-color: #F3F3F3;
+  background-color: #E8E8E8;
 }
 
 .thumbnail:hover {
@@ -428,11 +428,5 @@ figcaption {
   justify-content: space-around;
 }
 
-#listedIngredients {
-  /* display: flex;
-  flex-flow: wrap;
-  justify-content: flex-start;
-  justify-content: space-around; */
-}
 
 </style>

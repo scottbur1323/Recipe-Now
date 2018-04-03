@@ -1,7 +1,7 @@
 <template>
   <div class="meals">
     <h2>{{ msg }}</h2>
-    <button class="eachButton btn btn-secondary" type="button" name="button" @click="showTheEach($event)">Hide Meals</button>
+    <button class="eachButton btn btn-secondary" type="button" name="button" @click="showTheEach">Hide Meals</button>
     <app-each @mealWasClicked="mealClicked($event)" class="each" v-show="showEach"></app-each>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
     showTheEach: function(event) {
       this.showEach = !(this.showEach)
       if (this.showEach == true) {
-      } else event.srcElement.style.borderColor = "grey"
+      }
     },
     mealClicked: function(event) {
       this.ingredientsAll = event.ingredients
