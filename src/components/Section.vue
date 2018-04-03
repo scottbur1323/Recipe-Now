@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'Aside',
+  name: 'Section',
   data () {
     return {
       addMealButton: false,
@@ -47,7 +47,8 @@ export default {
           i13: '',
           i14: '',
           i15: '',
-      }
+      },
+      isItReady: true
     }
   },
   methods: {
@@ -70,7 +71,23 @@ export default {
         this.ingredients = event.target.value.split(', ')
       },
       addMealToDB: function() {
-        alert('Submitted!')
+        this.isItReady = true
+        if (this.newMeal.mealName.length < 4) {
+          alert("Meal Name needs to be at least 4 or more characters!")
+          this.isItReady = false
+        }
+        if (this.newMeal.mealPic.length < 11) {
+          alert("Meal Picture Link needs to be at least 10 or more characters long!")
+          this.isItReady = false
+        }
+        if (this.newMeal.instructionsLink.length < 11) {
+          alert("Meal Instructions Link needs to be at least 10 or more characters long!")
+          this.isItReady = false
+        }
+        if (this.ingredients.length < 1 && this.ingredients.length > 15) {
+          alert("Need to have at least one ingredients and no more than 15 ingredients.")
+          this.isItReady = false
+        }
         if (this.ingredients[0] !== '') {this.newMeal.i1 = this.ingredients[0]}
         if (this.ingredients[1] !== '') {this.newMeal.i2 = this.ingredients[1]}
         if (this.ingredients[2] !== '') {this.newMeal.i3 = this.ingredients[2]}
@@ -86,24 +103,28 @@ export default {
         if (this.ingredients[12] !== '') {this.newMeal.i13 = this.ingredients[12]}
         if (this.ingredients[13] !== '') {this.newMeal.i14 = this.ingredients[13]}
         if (this.ingredients[14] !== '') {this.newMeal.i15 = this.ingredients[14]}
-        fetch('https://family-meal-planner.herokuapp.com/meal/',
-        //fetch('http://localhost:3000/meal',
-        {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify(this.newMeal)
-        })
-        .then(function(res){
-          console.log(res)
-        }).catch(function(res){
-          console.log(res)
-        })
-        this.newMeal = { mealName: '', mealPic: '', instructionsLink: '', funIdeas: '', i1: '', i2: '', i3: '', i4: '', i5: '', i6: '', i7: '', i8: '', i9: '', i10: '', i11: '', i12: '', i13: '', i14: '', i15: ''}
-        this.ingredients = []
-        location.reload()
+
+        if (this.isItReady) {
+          alert('Submitted!')
+          fetch('https://family-meal-planner.herokuapp.com/meal/',
+          //fetch('http://localhost:3000/meal',
+          {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(this.newMeal)
+          })
+          .then(function(res){
+            console.log(res)
+          }).catch(function(res){
+            console.log(res)
+          })
+          this.newMeal = { mealName: '', mealPic: '', instructionsLink: '', funIdeas: '', i1: '', i2: '', i3: '', i4: '', i5: '', i6: '', i7: '', i8: '', i9: '', i10: '', i11: '', i12: '', i13: '', i14: '', i15: ''}
+          this.ingredients = []
+          location.reload()
+        }
       }
   }
 }

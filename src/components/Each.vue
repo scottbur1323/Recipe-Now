@@ -41,7 +41,10 @@
       <p>Anything you want to add?</p>
       <input class="formInput" type="text" name="funIdeas" v-on:keyup="populateFunIdeas" :value="objectToUpdate.funIdeas">
       <p>Enter the ingredients of your meal, separated by commas:</p>
-      <input class="formInput" type="text" name="Ingredients" v-on:keyup="populateIngredients" :value="ingredientsToUpdate"><p>{{ ingredientsToUpdate }}</p>
+      <input class="formInput" type="text" name="Ingredients" v-on:keyup="populateIngredients" :value="ingredientsToUpdate">
+      <div id="ingredientsDiv" v-for="(ingredient, index) in ingredientsToUpdate">
+        <div id="listedIngredients" > - {{ ingredientsToUpdate[index] }} - </div>
+      </div>
       <p></p>
       <button type="button" name="button" v-on:click="actualUpdate">Update Meal</button>
     </form>
@@ -65,7 +68,9 @@ export default {
       idToUpdate: 100,
       ingredientsToUpdate: [],
       objectToUpdate: {},
-      finalObjectToUpdate: {}
+      finalObjectToUpdate: {},
+      deleteStopper: 0,
+      isItReadyForUpdate: true
     }
   },
   methods: {
@@ -122,8 +127,10 @@ export default {
       }
     },
     checkForDelete: function(event) {
+      this.deleteStopper = 0
       for (let j=0;j<this.mealData.length;j++) {
-        if (event.path[1].childNodes[2].childNodes[0].currentSrc.slice(-10) == this.mealData[j].mealPic.slice(-10)) {
+        if (event.path[1].childNodes[2].childNodes[0].currentSrc.slice(-10) == this.mealData[j].mealPic.slice(-10) && this.deleteStopper == 0) {
+          this.deleteStopper++
           this.idToDelete = this.mealData[j].id
           this.actualDelete()
         }
@@ -161,6 +168,7 @@ export default {
           if (this.objectToUpdate.i15 != '' && this.objectToUpdate.i15 != null) {this.ingredientsToUpdate.push(this.objectToUpdate.i15)}
         }
       }
+      console.log(this.ingredientsToUpdate)
     },
     actualDelete: function() {
       alert('Deleting...')
@@ -190,52 +198,94 @@ export default {
       }
     },
     actualUpdate: function() {
+        this.finalObjectToUpdate = {
+          mealName: '',
+          mealPic: '',
+          instructionsLink: '',
+          funIdeas: '',
+          i1: '',
+          i2: '',
+          i3: '',
+          i4: '',
+          i5: '',
+          i6: '',
+          i7: '',
+          i8: '',
+          i9: '',
+          i10: '',
+          i11: '',
+          i12: '',
+          i13: '',
+          i14: '',
+          i15: ''
+        }
         this.finalObjectToUpdate.mealName = this.objectToUpdate.mealName
         this.finalObjectToUpdate.mealPic = this.objectToUpdate.mealPic
         this.finalObjectToUpdate.instructionsLink = this.objectToUpdate.instructionsLink
         this.finalObjectToUpdate.funIdeas = this.objectToUpdate.funIdeas
-        console.log(this.ingredientsToUpdate)
-        console.log(this.ingredientsToUpdate[8])
-        if (this.ingredientsToUpdate[0] != '' && this.ingredientsToUpdate[0] != null) {this.finalObjectToUpdate.i1 = this.ingredientsToUpdate[0]}
-        if (this.ingredientsToUpdate[1] != '' && this.ingredientsToUpdate[1] != null) {this.finalObjectToUpdate.i2 = this.ingredientsToUpdate[1]}
-        if (this.ingredientsToUpdate[2] != '' && this.ingredientsToUpdate[2] != null) {this.finalObjectToUpdate.i3 = this.ingredientsToUpdate[2]}
-        if (this.ingredientsToUpdate[3] != '' && this.ingredientsToUpdate[3] != null) {this.finalObjectToUpdate.i4 = this.ingredientsToUpdate[3]}
-        if (this.ingredientsToUpdate[4] != '' && this.ingredientsToUpdate[4] != null) {this.finalObjectToUpdate.i5 = this.ingredientsToUpdate[4]}
-        if (this.ingredientsToUpdate[5] != '' && this.ingredientsToUpdate[5] != null) {this.finalObjectToUpdate.i6 = this.ingredientsToUpdate[5]}
-        if (this.ingredientsToUpdate[6] != '' && this.ingredientsToUpdate[6] != null) {this.finalObjectToUpdate.i7 = this.ingredientsToUpdate[6]}
-        if (this.ingredientsToUpdate[7] != '' && this.ingredientsToUpdate[7] != null) {this.finalObjectToUpdate.i8 = this.ingredientsToUpdate[7]}
-        if (this.ingredientsToUpdate[8] != '' && this.ingredientsToUpdate[8] != null) {this.finalObjectToUpdate.i9 = this.ingredientsToUpdate[8]} else {this.finalObjectToUpdate.i9 = ''}
-        if (this.ingredientsToUpdate[9] != '' && this.ingredientsToUpdate[9] != null) {this.finalObjectToUpdate.i10 = this.ingredientsToUpdate[9]} else {this.finalObjectToUpdate.i10 = ''}
-        if (this.ingredientsToUpdate[10] != '' && this.ingredientsToUpdate[10] != null) {this.finalObjectToUpdate.i11 = this.ingredientsToUpdate[10]} else {this.finalObjectToUpdate.i1 = ''}
-        if (this.ingredientsToUpdate[11] != '' && this.ingredientsToUpdate[11] != null) {this.finalObjectToUpdate.i12 = this.ingredientsToUpdate[11]} else {this.finalObjectToUpdate.i2 = ''}
-        if (this.ingredientsToUpdate[12] != '' && this.ingredientsToUpdate[12] != null) {this.finalObjectToUpdate.i13 = this.ingredientsToUpdate[12]} else {this.finalObjectToUpdate.i3 = ''}
-        if (this.ingredientsToUpdate[13] != '' && this.ingredientsToUpdate[13] != null) {this.finalObjectToUpdate.i14 = this.ingredientsToUpdate[13]} else {this.finalObjectToUpdate.i4 = ''}
-        if (this.ingredientsToUpdate[14] != '' && this.ingredientsToUpdate[14] != null) {this.finalObjectToUpdate.i15 = this.ingredientsToUpdate[14]} else {this.finalObjectToUpdate.i5 = ''}
-        alert('Updating...')
-        if (confirm('Are you sure you want to update this meal in the database?')) {
-          fetch(`https://family-meal-planner.herokuapp.com/meal/${this.objectToUpdate.id}`,
-          //fetch(`http://localhost:3000/meal/${this.objectToUpdate.id}`,
-          {
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            method: 'PUT',
-            body: JSON.stringify(this.finalObjectToUpdate)
-          })
-          .then(function(res){
-            console.log(res)
-          }).catch(function(res){
-            console.log(res)
-          })
-          this.showMeals()
-          this.getPremadeMeals()
-          location.reload()
-        } else {
-            alert("Meal Was NOT Updated!")
-            this.getPremadeMeals()
+
+        this.isItReadyForUpdate = true
+        if (this.finalObjectToUpdate.mealName.length < 4 || this.finalObjectToUpdate.mealName.length > 25) {
+          alert("Meal Name needs to be at least 4 and less than 25 characters long!")
+          this.isItReadyForUpdate = false
+        }
+        if (this.finalObjectToUpdate.mealPic.length < 11) {
+          alert("Meal Picture Link needs to be at least 10 or more characters long!")
+          this.isItReadyForUpdate = false
+        }
+        if (this.finalObjectToUpdate.instructionsLink.length < 11) {
+          alert("Meal Instructions Link needs to be at least 10 or more characters long!")
+          this.isItReadyForUpdate = false
+        }
+        if (this.ingredientsToUpdate.length < 1 || this.ingredientsToUpdate.length > 15) {
+          alert("Need to have at least one ingredients and no more than 15 ingredients.")
+          this.isItReadyForUpdate = false
+        }
+
+        if (this.ingredientsToUpdate[0] != '' && this.ingredientsToUpdate[0]) {this.finalObjectToUpdate.i1 = this.ingredientsToUpdate[0]}
+        if (this.ingredientsToUpdate[1] != '' && this.ingredientsToUpdate[1]) {this.finalObjectToUpdate.i2 = this.ingredientsToUpdate[1]}
+        if (this.ingredientsToUpdate[2] != '' && this.ingredientsToUpdate[2]) {this.finalObjectToUpdate.i3 = this.ingredientsToUpdate[2]}
+        if (this.ingredientsToUpdate[3] != '' && this.ingredientsToUpdate[3]) {this.finalObjectToUpdate.i4 = this.ingredientsToUpdate[3]}
+        if (this.ingredientsToUpdate[4] != '' && this.ingredientsToUpdate[4]) {this.finalObjectToUpdate.i5 = this.ingredientsToUpdate[4]}
+        if (this.ingredientsToUpdate[5] != '' && this.ingredientsToUpdate[5]) {this.finalObjectToUpdate.i6 = this.ingredientsToUpdate[5]}
+        if (this.ingredientsToUpdate[6] != '' && this.ingredientsToUpdate[6]) {this.finalObjectToUpdate.i7 = this.ingredientsToUpdate[6]}
+        if (this.ingredientsToUpdate[7] != '' && this.ingredientsToUpdate[7]) {this.finalObjectToUpdate.i8 = this.ingredientsToUpdate[7]}
+        if (this.ingredientsToUpdate[8] != '' && this.ingredientsToUpdate[8]) {this.finalObjectToUpdate.i9 = this.ingredientsToUpdate[8]}
+        if (this.ingredientsToUpdate[9] != '' && this.ingredientsToUpdate[9]) {this.finalObjectToUpdate.i10 = this.ingredientsToUpdate[9]}
+        if (this.ingredientsToUpdate[10] != '' && this.ingredientsToUpdate[10]) {this.finalObjectToUpdate.i11 = this.ingredientsToUpdate[10]}
+        if (this.ingredientsToUpdate[11] != '' && this.ingredientsToUpdate[11]) {this.finalObjectToUpdate.i12 = this.ingredientsToUpdate[11]}
+        if (this.ingredientsToUpdate[12] != '' && this.ingredientsToUpdate[12]) {this.finalObjectToUpdate.i13 = this.ingredientsToUpdate[12]}
+        if (this.ingredientsToUpdate[13] != '' && this.ingredientsToUpdate[13]) {this.finalObjectToUpdate.i14 = this.ingredientsToUpdate[13]}
+        if (this.ingredientsToUpdate[14] != '' && this.ingredientsToUpdate[14]) {this.finalObjectToUpdate.i15 = this.ingredientsToUpdate[14]}
+
+
+        if (this.isItReadyForUpdate) {
+          alert('Updating...')
+          if (confirm('Are you sure you want to update this meal in the database?')) {
+            fetch(`https://family-meal-planner.herokuapp.com/meal/${this.objectToUpdate.id}`,
+            //fetch(`http://localhost:3000/meal/${this.objectToUpdate.id}`,
+            {
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              method: 'PUT',
+              body: JSON.stringify(this.finalObjectToUpdate)
+            })
+            .then(function(res){
+              console.log(res)
+            }).catch(function(res){
+              console.log(res)
+            })
             this.showMeals()
+            this.getPremadeMeals()
             location.reload()
+          } else {
+              alert("Meal Was NOT Updated!")
+              this.getPremadeMeals()
+              this.showMeals()
+              location.reload()
+          }
         }
     },
     showDeletes: function() {
@@ -290,6 +340,7 @@ export default {
     },
     populateIngredients() {
       this.ingredientsToUpdate = event.target.value.split(',')
+      console.log(this.ingredientsToUpdate)
     }
   },
   mounted() {
@@ -368,6 +419,20 @@ figcaption {
 
 .formInput {
   min-width: 240px;
+}
+
+#ingredientsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-around;
+}
+
+#listedIngredients {
+  /* display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+  justify-content: space-around; */
 }
 
 </style>
