@@ -1,21 +1,6 @@
-# family-meal-lister
-
-> Turn meals in to grocery lists
-
+# Recipe Now!
+ - A full-stack web application where the user selects meals they would like to make and let Recipe Now! write your shopping list for you.
+ - Go to the site: https://family-meal-planner.firebaseapp.com/
+  
 ## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+ -A full-stack web app using Vue.js, Node.js, Express, Knex.js, PostgreSQL and Heroku.
