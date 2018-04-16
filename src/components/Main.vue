@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1 id="nameTitle">{{ msg }}</h1>
     <body class="body">
       <app-meals @mealWasClicked2="mealClicked2($event)" class="meals" v-show="showGenerated"></app-meals>
       <app-aside :ingredients="ingredients" class="aside" v-show="showGenerated"></app-aside>
@@ -66,6 +66,10 @@ body {
 .generateButton {
   align-self: center;
   margin-top: 20px;
+}
+
+#nameTitle {
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 </style>

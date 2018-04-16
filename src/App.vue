@@ -2,12 +2,8 @@
   <div id="app">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
-
-
+    <link rel="stylesheet" href="animate.min.css">
     <header>
-      <p>
-      </p>
-      </script>
     </header>
     <router-view/>
   </div>
@@ -22,7 +18,6 @@ export default {
 
 <style>
 #app {
-  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
   font-family: 'Baloo', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,4 +27,7 @@ export default {
   background-color: #E4E4E4;
   color: #282C34;
 }
+
+
+
 </style>
