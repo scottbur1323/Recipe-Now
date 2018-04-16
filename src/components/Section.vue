@@ -106,6 +106,7 @@ export default {
 
         if (this.isItReady) {
           alert('Submitted!')
+          console.log(this.newMeal)
           fetch('https://family-meal-planner.herokuapp.com/meal/',
           //fetch('http://localhost:3000/meal',
           {
