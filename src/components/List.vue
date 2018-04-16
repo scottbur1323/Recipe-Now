@@ -12,7 +12,6 @@
       <button type="button" name="button" @click="addTheIngredient">Add Item</button>
       <button type="button" name="button" @click="deleteLastIngredient">Delete Last Item</button>
     </section>
-
     <div id="column" v-show="showTheGrocers">
       <section id="column2" v-for="grocers in grocerData">
         <figure class="picntext">
@@ -21,7 +20,6 @@
         </figure>
       </section>
     </div>
-
     <div id="column" v-show="showTheUpdateGrocers">
       <section id="column2" v-for="grocers in grocerData">
         <figure class="picntext">
@@ -30,7 +28,6 @@
         </figure>
       </section>
     </div>
-
     <div id="column" v-show="showTheDeleteGrocers">
       <section id="column2" v-for="grocers in grocerData">
         <figure class="picntext">
@@ -155,7 +152,6 @@ export default {
       this.showTheUpdateForm = false
       this.showTheDeleteGrocers = false
       this.grocerObjectToAdd = { grocerName: '', grocerPic: '', grocerLink: '', other: '' }
-
     },
     clickDeleteGrocer: function() {
       this.isItReady = false
@@ -197,7 +193,6 @@ export default {
           this.grocerObjectToAdd.grocerPic = this.grocerData[i].grocerPic
           this.grocerObjectToAdd.grocerLink = this.grocerData[i].grocerLink
           this.grocerObjectToAdd.other = this.grocerData[i].other
-
         }
       }
       window.scrollBy(0, 200)
@@ -304,7 +299,6 @@ export default {
 </script>
 
 <style scoped>
-
 .eachIngredient {
   display: flex;
   flex-flow: row;
@@ -313,12 +307,10 @@ export default {
   border-width: 1px;
   border-style: ridge;
 }
-
 #img {
   width: 129px;
   height: 80px;
 }
-
 #column {
   padding-top: 20px;
   justify-content: center;
@@ -328,7 +320,6 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
-
 .picntext {
   display: flex;
   flex-direction: column;

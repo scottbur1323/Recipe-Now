@@ -81,7 +81,6 @@ export default {
         })
         .then(response => {
           this.mealData = response.meals
-          console.log(this.mealData)
         })
     },
     selectItem: function(event) {
@@ -168,7 +167,6 @@ export default {
           if (this.objectToUpdate.i15 != '' && this.objectToUpdate.i15 != null) {this.ingredientsToUpdate.push(this.objectToUpdate.i15)}
         }
       }
-      console.log(this.ingredientsToUpdate)
     },
     actualDelete: function() {
       alert('Deleting...')
@@ -223,7 +221,6 @@ export default {
         this.finalObjectToUpdate.mealPic = this.objectToUpdate.mealPic
         this.finalObjectToUpdate.instructionsLink = this.objectToUpdate.instructionsLink
         this.finalObjectToUpdate.funIdeas = this.objectToUpdate.funIdeas
-
         this.isItReadyForUpdate = true
         if (this.finalObjectToUpdate.mealName.length < 4 || this.finalObjectToUpdate.mealName.length > 25) {
           alert("Meal Name needs to be at least 4 and less than 25 characters long!")
@@ -241,7 +238,6 @@ export default {
           alert("Need to have at least one ingredients and no more than 15 ingredients.")
           this.isItReadyForUpdate = false
         }
-
         if (this.ingredientsToUpdate[0] != '' && this.ingredientsToUpdate[0]) {this.finalObjectToUpdate.i1 = this.ingredientsToUpdate[0]}
         if (this.ingredientsToUpdate[1] != '' && this.ingredientsToUpdate[1]) {this.finalObjectToUpdate.i2 = this.ingredientsToUpdate[1]}
         if (this.ingredientsToUpdate[2] != '' && this.ingredientsToUpdate[2]) {this.finalObjectToUpdate.i3 = this.ingredientsToUpdate[2]}
@@ -257,8 +253,6 @@ export default {
         if (this.ingredientsToUpdate[12] != '' && this.ingredientsToUpdate[12]) {this.finalObjectToUpdate.i13 = this.ingredientsToUpdate[12]}
         if (this.ingredientsToUpdate[13] != '' && this.ingredientsToUpdate[13]) {this.finalObjectToUpdate.i14 = this.ingredientsToUpdate[13]}
         if (this.ingredientsToUpdate[14] != '' && this.ingredientsToUpdate[14]) {this.finalObjectToUpdate.i15 = this.ingredientsToUpdate[14]}
-
-
         if (this.isItReadyForUpdate) {
           alert('Updating...')
           if (confirm('Are you sure you want to update this meal in the database?')) {
@@ -340,7 +334,6 @@ export default {
     },
     populateIngredients() {
       this.ingredientsToUpdate = event.target.value.split(',')
-      console.log(this.ingredientsToUpdate)
     }
   },
   mounted() {
@@ -350,7 +343,6 @@ export default {
 </script>
 
 <style scoped>
-
 #column {
   justify-content: center;
   max-width: 100%;
@@ -371,7 +363,6 @@ export default {
   padding-top: 0px;
   background-color: #E8E8E8;
 }
-
 .thumbnail:hover {
   opacity: 0.7;
   transition: opacity 0.5s;
@@ -395,38 +386,30 @@ export default {
   transition: opacity 1s, background 1s;
   background: #EBEFF7;
 }
-
 #img {
   width: 129px;
   height: 80px;
 }
-
 figcaption {
   width: 129px;
   min-height: 44px;
 }
-
 #column2 {
   height:160px;
   display: flex;
   flex-direction: row;
 }
-
 .checkbox {
   margin-top: 75px;
   margin-right: -25px;
 }
-
 .formInput {
   min-width: 240px;
 }
-
 #ingredientsDiv {
   display: flex;
   flex-direction: row;
   justify-content: center;
   justify-content: space-around;
 }
-
-
 </style>

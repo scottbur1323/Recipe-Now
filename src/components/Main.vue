@@ -1,12 +1,11 @@
 <template>
   <div>
-    <h1 id="nameTitle">{{ msg }}</h1>
+    <h1 id="nameTitle">Recipe Now!</h1>
     <body class="body">
       <app-meals @mealWasClicked2="mealClicked2($event)" class="meals" v-show="showGenerated"></app-meals>
       <app-aside :ingredients="ingredients" class="aside" v-show="showGenerated"></app-aside>
       <button type="button" class="generateButton" v-on:click="showGenerated = !showGenerated" v-show="showGenerated">Generate Final List</button>
       <button type="button" class="generateButton" v-on:click="showGenerated = !showGenerated" v-show="!showGenerated">Go Back</button>
-
       <app-list :ingredients="ingredients" class="list" v-show="!showGenerated"></app-list>
       <app-section v-show="showGenerated"></app-section>
     </body>
@@ -25,7 +24,6 @@ export default {
   name: 'Main',
   data () {
     return {
-      msg: "Family Meal Planner",
       ingredients: [],
       showGenerated: true
     }
@@ -46,7 +44,6 @@ export default {
 </script>
 
 <style scoped>
-
 body {
   display: flex;
   flex-direction: column;
@@ -62,14 +59,8 @@ body {
   width: 100%;
   border-style: ridge;
 }
-
 .generateButton {
   align-self: center;
   margin-top: 20px;
 }
-
-#nameTitle {
-  font-family: 'Gloria Hallelujah', cursive;
-}
-
 </style>

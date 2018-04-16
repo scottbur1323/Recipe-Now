@@ -131,18 +131,10 @@ export default {
 </script>
 
 <style>
-
 .addButton {
-  /* align-self: center;
-  border-width: 5px;
-  border-color: "blue";
-  transition: border-color 1s;
-  width: 85px; */
   margin-top: 20px;
 }
-
 .formInput {
   min-width: 240px;
 }
-
 </style>

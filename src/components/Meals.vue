@@ -1,6 +1,6 @@
 <template>
   <div class="meals">
-    <h2>{{ msg }}</h2>
+    <h2>- Click on meals to add to grocery list -</h2>
     <button class="eachButton btn btn-secondary" type="button" name="button" @click="showTheEach">Hide Meals</button>
     <app-each @mealWasClicked="mealClicked($event)" class="each" v-show="showEach"></app-each>
   </div>
@@ -13,7 +13,6 @@ export default {
   name: 'Meals',
   data () {
     return {
-      msg: "- Click on meals to add to grocery list -",
       showEach: true,
       ingredientsAll: []
     }
@@ -38,15 +37,9 @@ export default {
 </script>
 
 <style scoped>
-
-.meals {
-
-}
-
 .eachButton {
   margin-bottom: 20px;
 }
-
 app-each {
   transition: height 1
 }
