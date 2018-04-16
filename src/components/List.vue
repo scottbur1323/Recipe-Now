@@ -195,7 +195,6 @@ export default {
           this.grocerObjectToAdd.other = this.grocerData[i].other
         }
       }
-      window.scrollBy(0, 200)
     },
     populateGrocerName: function() {
       this.grocerObjectToAdd.grocerName = event.target.value
